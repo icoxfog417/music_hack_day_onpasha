@@ -11,6 +11,6 @@ class TestYamaha(unittest.TestCase):
 
     def test_create_song(self):
         y = Yamaha()
-        mp3_url = y.create_song(["春の歌"])
+        mp3_url = y.create_song(["夏の歌", "六本木にともる", "盆踊りと", "恋の歌"])
         self.assertTrue(mp3_url)
         print(mp3_url)

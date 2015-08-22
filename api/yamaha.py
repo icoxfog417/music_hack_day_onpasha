@@ -50,7 +50,7 @@ class Yamaha():
                 cookies = accepted.cookies
 
         mp3_url = ""
-        if retry_after > 0:
+        while retry_after > 0:
             url = self.HOST
             params = {
                 "ope": "query",
@@ -66,9 +66,10 @@ class Yamaha():
 
                 if status == "done":
                     mp3_url = obserbed_xml.find("url").text
+                    break
                 elif status == "working":
-                    retry_after = obserbed_xml.find("retry_after").text
-                    retry_after = float(retry_after)
+                    retry_after = obserbed_xml.find("retryAfter").text
+                    c = float(retry_after)
                 elif status == "error":
                     retry_after = -1
 
