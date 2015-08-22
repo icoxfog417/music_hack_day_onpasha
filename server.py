@@ -5,8 +5,8 @@ import tornado.httpserver
 import tornado.escape
 from tornado.options import define, options
 from machines.machine_loader import MachineLoader
-import machines.number_recognizer
-from machines.number_recognizer.validator import Validator
+import machines.photo_mood
+from machines.photo_mood.validator import Validator
 from envs import get_env
 
 
@@ -16,7 +16,7 @@ class IndexHandler(tornado.web.RequestHandler):
 
 
 class BaseHandler(tornado.web.RequestHandler):
-    MACHINE_SESSION_KEY = "number_recognizer"
+    MACHINE_SESSION_KEY = "photo_mood"
 
 
 class PredictionHandler(BaseHandler):
@@ -27,7 +27,7 @@ class PredictionHandler(BaseHandler):
         # print(data)
 
         validated = Validator.validate_data(data)
-        machine = MachineLoader.load(machines.number_recognizer)
+        machine = MachineLoader.load(machines.photo_mood)
         if len(validated) > 0:
             predicted = machine.predict(validated)
             resp["result"] = str(predicted[0])
@@ -43,7 +43,7 @@ class FeedbackHandler(BaseHandler):
 
         feedback = Validator.validate_feedback(data)
         if len(feedback) > 0:
-            MachineLoader.feedback(machines.number_recognizer, feedback)
+            MachineLoader.feedback(machines.photo_mood, feedback)
         else:
             result = "feedback format is wrong."
 

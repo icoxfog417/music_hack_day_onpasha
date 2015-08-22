@@ -1,0 +1,14 @@
+url	mood	building	city	clothing	downtown	maillot	swimwear
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
+https://oxfordportal.blob.core.windows.net/vision/Analysis/4-1.jpg 	1	0	0	0.9671	0	0.9671	0.9671
+https://oxfordportal.blob.core.windows.net/vision/Analysis/2-1.jpg 	0	0.5939	0.5863	0	0.5817	0	0
