@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T2SData>
+
+    <Tempo>auto</Tempo>
+    <Measures>8</Measures>
+    <Transpose>auto</Transpose>
+    <Category>VCS_BASEDATA</Category>
+    <Compose>
+        <Singer>
+            <lang>0</lang>
+            <dbID>BDRE87E2FTTKTDBA</dbID>
+            <singerName>VY1V3</singerName>
+            <breathiness>0</breathiness>
+            <brightness>0</brightness>
+            <clearness>0</clearness>
+            <opening>0</opening>
+            <gender>0</gender>
+        </Singer>
+
+        <Fuwari><![CDATA[-]]></Fuwari>
+        <Yokuyo><![CDATA[-]]></Yokuyo>
+        <Chord><![CDATA[-]]></Chord>
+
+        <LyricsBlock>
+        </LyricsBlock>
+
+    </Compose>
+
+    <Arrange>
+        <Chord><![CDATA[-]]></Chord>
+        <Style><![CDATA[-]]></Style>
+        <SequenceType><![CDATA[-]]></SequenceType>
+        <TG>Lite</TG>
+    </Arrange>
+
+</T2SData>

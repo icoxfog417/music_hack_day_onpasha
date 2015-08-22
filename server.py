@@ -7,10 +7,7 @@ from tornado.options import define, options
 from machines.machine_loader import MachineLoader
 import machines.number_recognizer
 from machines.number_recognizer.validator import Validator
-
-
-# Define command line arguments
-define("port", default=3000, help="run on the given port", type=int)
+from envs import get_env
 
 
 class IndexHandler(tornado.web.RequestHandler):
