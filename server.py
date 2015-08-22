@@ -4,9 +4,9 @@ import tornado.ioloop
 import tornado.httpserver
 import tornado.escape
 from tornado.options import define, options
-from machines.machine_loader import MachineLoader
 import machines.photo_mood
 from machines.photo_mood.validator import Validator
+from api.rekognition import Rekognition
 from envs import get_env
 
 
@@ -18,21 +18,30 @@ class IndexHandler(tornado.web.RequestHandler):
 class BaseHandler(tornado.web.RequestHandler):
     MACHINE_SESSION_KEY = "photo_mood"
 
-
 class PredictionHandler(BaseHandler):
 
     def post(self):
-        resp = {"result": str(-1)}
-        data = self.get_arguments("data[]")
-        # print(data)
+        image_url = self.get_argument("image_url", default="")
+        image_urls = self.get_arguments("image_urls[]")
+        rekognizer = Rekognition()
 
-        validated = Validator.validate_data(data)
-        machine = MachineLoader.load(machines.photo_mood)
-        if len(validated) > 0:
-            predicted = machine.predict(validated)
-            resp["result"] = str(predicted[0])
+        if len(image_urls) == 0:
+            image_urls = [image_url]
 
-        self.write(resp)
+        moods = rekognizer.images_to_mood(image_urls)
+
+        # gracenote api
+
+
+        # get lyric
+
+        # build lyric
+
+        # make mp3 song
+
+        self.write(
+            {"mp3_url": ""}
+        )
 
 
 class FeedbackHandler(BaseHandler):
