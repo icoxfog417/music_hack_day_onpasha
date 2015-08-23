@@ -1,4 +1,3 @@
-import machines.photo_mood
 from api.rekognition import Rekognition
 from api.gracenote import Gracenote
 from api.livefans import LiveFans
@@ -21,7 +20,7 @@ def convert(image_urls):
 
     # gracenote api
     # todo: parallel process by mood
-    mood = list(moods.keys())[0]
+    mood = max(moods, key=moods.get)
     tracks = g_.get_artists_mood_tracks(artists, mood)
 
     # get and build lyric
