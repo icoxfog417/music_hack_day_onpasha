@@ -14,8 +14,8 @@ def convert(image_urls):
     y_ = Yamaha()
 
     # analyze moode
-    # moods = r_.images_to_mood(image_urls)
-    moods = {'Easygoing': 1, 'Cool': 1}
+    moods = r_.images_to_mood(image_urls)
+    #moods = {'Easygoing': 1, 'Cool': 1}
 
     # choose artists
     artists = l_.get_live_artists(5)
