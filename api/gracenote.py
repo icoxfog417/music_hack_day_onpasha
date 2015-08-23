@@ -19,8 +19,13 @@ class Gracenote():
         self.client_id = get_env("gracenote_client_id")
         self.user_id = get_env("gracenote_user_id")
 
-    def get_artists_mood_tracks(self, artists, mood_index):
-        element_id = self.MOOD_IDS[mood_index]
+    def get_artists_mood_tracks(self, artists, mood):
+        element_id = self.MOOD_IDS[mood]
         artist = random.sample(artists, 1)[0]
         metadatas = pygn.createRadio(clientID=self.client_id, userID=self.user_id, artist=artist, mood=element_id, popularity="800", similarity="800", count="5")
-        return metadatas
+        tracks = []
+        for m in metadatas:
+            if "track_title" in m:
+                tracks.append(m["track_title"])
+
+        return tracks

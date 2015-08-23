@@ -599,7 +599,8 @@ def fetch(clientID='', userID='', GNID=''):
             metadata['artist_type'] = _getMultiElemText(albumElem, 'ARTIST_TYPE', 'ORD', 'ID')
         else:
             # Try to get OET again by fetching album by GNID
-            metadata['artist_origin'], metadata['artist_era'], metadata['artist_type'] = _getOET(clientID, userID, metadata['album_gnid'])
+            if clientID and userID:
+                metadata['artist_origin'], metadata['artist_era'], metadata['artist_type'] = _getOET(clientID, userID, metadata['album_gnid'])
 
         # Parse track metadata
         matchedTrackElem = albumElem.find('MATCHED_TRACK_NUM')

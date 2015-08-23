@@ -5,7 +5,7 @@ from envs import get_env
 
 
 class Rekognition():
-    FEATURES = ['building', 'clothing', 'downtown', 'maillot', 'swimwear']
+    FEATURES = ['ball', 'balloon', 'blossom', 'bulb', 'coat_rack', 'cone', 'flower', 'food', 'fountain', 'hang_out', 'lighting', 'night', 'outdoors', 'plant', 'sea', 'sky', 'sunset', 'table', 'tree', 'vehicle']
     MOODS = ["Peaceful", "Easygoing", "Stirring", "Serious", "Aggressive", "Sophisticated", "Cool", "Romantic"]
 
     def __init__(self):

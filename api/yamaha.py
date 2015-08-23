@@ -69,7 +69,7 @@ class Yamaha():
                     break
                 elif status == "working":
                     retry_after = obserbed_xml.find("retryAfter").text
-                    c = float(retry_after)
+                    retry_after = float(retry_after)
                 elif status == "error":
                     retry_after = -1
 

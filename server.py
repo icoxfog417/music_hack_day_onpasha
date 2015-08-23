@@ -4,9 +4,8 @@ import tornado.ioloop
 import tornado.httpserver
 import tornado.escape
 from tornado.options import define, options
-import machines.photo_mood
 from machines.photo_mood.validator import Validator
-from api.rekognition import Rekognition
+import api.photo2song as p2s
 from envs import get_env
 
 
@@ -23,24 +22,17 @@ class PhotoToSongHandler(BaseHandler):
     def post(self):
         image_url = self.get_argument("image_url", default="")
         image_urls = self.get_arguments("image_urls[]")
-        rekognizer = Rekognition()
 
         if len(image_urls) == 0:
             image_urls = [image_url]
 
-        # moods = rekognizer.images_to_mood(image_urls)
+        result = {}
+        try:
+            result = p2s.convert(image_urls)
+        except Exception as ex:
+            print(ex)
 
-        # gracenote api
-
-        # get lyric
-
-        # build lyric
-
-        # make mp3 song
-
-        self.write(
-            {"mp3_url": ""}
-        )
+        self.write(result)
 
 
 class FeedbackHandler(BaseHandler):
