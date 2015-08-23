@@ -9,6 +9,8 @@ def get_env(key):
         environ_file = os.path.join(os.path.dirname(__file__), "./environ.yaml")
         with open(environ_file, "rb") as f:
             envs = yaml.load(f)
-            value = envs[key.lower()]
+            key = key.lower()
+            if key in envs:
+                value = envs[key.lower()]
 
     return value

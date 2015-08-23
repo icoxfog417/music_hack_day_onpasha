@@ -18,7 +18,7 @@ class IndexHandler(tornado.web.RequestHandler):
 class BaseHandler(tornado.web.RequestHandler):
     MACHINE_SESSION_KEY = "photo_mood"
 
-class PredictionHandler(BaseHandler):
+class PhotoToSongHandler(BaseHandler):
 
     def post(self):
         image_url = self.get_argument("image_url", default="")
@@ -28,10 +28,9 @@ class PredictionHandler(BaseHandler):
         if len(image_urls) == 0:
             image_urls = [image_url]
 
-        moods = rekognizer.images_to_mood(image_urls)
+        # moods = rekognizer.images_to_mood(image_urls)
 
         # gracenote api
-
 
         # get lyric
 
@@ -65,7 +64,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
-            (r"/predict", PredictionHandler),
+            (r"/photo2song", PhotoToSongHandler),
             (r"/feedback", FeedbackHandler),
         ]
 
@@ -73,9 +72,9 @@ class Application(tornado.web.Application):
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
-            xsrf_cookies=True,
             debug=True,
         )
+        # xsrf_cookies=True,
 
         super(Application, self).__init__(handlers, **settings)
 
@@ -83,7 +82,7 @@ class Application(tornado.web.Application):
 def main():
     # tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
-    port = int(os.environ.get("PORT", options.port))
+    port = 8000 if not get_env("port") else int(get_env("port"))
     print("server is running on port {0}".format(port))
     http_server.listen(port)
     tornado.ioloop.IOLoop.current().start()
