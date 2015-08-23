@@ -18,12 +18,12 @@ Now, you can here your photo image!
 Please prepare the `environ.yaml` at the project root.
 
 ```
-yamaha_key: your_ke
-yamaha_ver: your_ke
-rekognition_key: your_ke
-rekognition_secret: your_ke
-gracenote_client_id: your_ke
-gracenote_user_id: your_ke
-livefan_client_id: your_ke
-petitlyrics_auth_key: your_ke
+yamaha_key: your_key
+yamaha_ver: your_key
+rekognition_key: your_key
+rekognition_secret: your_key
+gracenote_client_id: your_key
+gracenote_user_id: your_key
+livefan_client_id: your_key
+petitlyrics_auth_key: your_key
 ```
