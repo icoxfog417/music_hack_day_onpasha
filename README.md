@@ -12,3 +12,18 @@ Image to Song API Server
 * (Share songs by [SendGrid](https://sendgrid.kke.co.jp/))
 
 Now, you can here your photo image!
+
+## Setting
+
+Please prepare the `environ.yaml` at the project root.
+
+```
+yamaha_key: your_ke
+yamaha_ver: your_ke
+rekognition_key: your_ke
+rekognition_secret: your_ke
+gracenote_client_id: your_ke
+gracenote_user_id: your_ke
+livefan_client_id: your_ke
+petitlyrics_auth_key: your_ke
+```
