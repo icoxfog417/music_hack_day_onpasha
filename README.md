@@ -1,10 +1,14 @@
-# number_recognizer
-handwritten number recognizer by scikit-learn
+# [Onpasha](http://hacklog.jp/works/3391) API Server
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+Image to Song API Server
 
-If you want to create the application from command line, please use the below command.
+* Convert image to [Gracenote](https://developer.gracenote.com/ja/web-api?language=ja)'s mood by scikit-learn
+* Get artists info from [LiveFans](http://www.livefans.jp/)
+* Get tracks by mood and artists (Gracenote).
+* Get track's lyric by [PetitLyrics](http://petitlyrics.com/)
+* Build new Lyric from it.
+* Convert lyric to song by [YAMAHA VOCALODUCER](http://jp.yamaha.com/news_release/2013/13102104.html)
+* ([Pepper](http://www.softbank.jp/robot/special/pepper/) sings a song)
+* (Share songs by [SendGrid](https://sendgrid.kke.co.jp/))
 
-```
-heroku create --buildpack https://github.com/kennethreitz/conda-buildpack.git
-```
+Now, you can here your photo image!

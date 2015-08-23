@@ -35,29 +35,12 @@ class PhotoToSongHandler(BaseHandler):
         self.write(result)
 
 
-class FeedbackHandler(BaseHandler):
-
-    def post(self):
-        data = self.get_arguments("data[]")
-        result = ""
-
-        feedback = Validator.validate_feedback(data)
-        if len(feedback) > 0:
-            MachineLoader.feedback(machines.photo_mood, feedback)
-        else:
-            result = "feedback format is wrong."
-
-        resp = {"result": result}
-        self.write(resp)
-
-
 class Application(tornado.web.Application):
 
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
             (r"/photo2song", PhotoToSongHandler),
-            (r"/feedback", FeedbackHandler),
         ]
 
         settings = dict(
