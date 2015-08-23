@@ -6,7 +6,7 @@ from envs import get_env
 
 class Rekognition():
     FEATURES = ['building', 'clothing', 'downtown', 'maillot', 'swimwear']
-    MOODS = ["good", "bad"]
+    MOODS = ["Peaceful", "Easygoing", "Stirring", "Serious", "Aggressive", "Sophisticated", "Cool", "Romantic"]
 
     def __init__(self):
         self.columns = self.FEATURES
@@ -48,4 +48,3 @@ class Rekognition():
             mood_score[self.MOODS[int(mood)]] = 1
 
         return mood_score
-
