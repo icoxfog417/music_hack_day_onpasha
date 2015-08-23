@@ -1,3 +1,4 @@
+import re
 from api.rekognition import Rekognition
 from api.gracenote import Gracenote
 from api.livefans import LiveFans
@@ -13,7 +14,8 @@ def convert(image_urls):
     y_ = Yamaha()
 
     # analyze moode
-    moods = r_.images_to_mood(image_urls)
+    # moods = r_.images_to_mood(image_urls)
+    moods = {'Easygoing': 1, 'Cool': 1}
 
     # choose artists
     artists = l_.get_live_artists(5)
@@ -26,16 +28,17 @@ def convert(image_urls):
     # get and build lyric
     song = []
     count = 0
+    is_japanese = lambda txt: True if re.search("[ぁ-んァ-ヴ]", txt) else False
     for t in tracks:
-        lyrics = p_.track_to_lyrics(t, offset=count, limit=2)
-        if len(lyrics) > 0:
+        lyrics = p_.track_to_lyrics(t, offset=count)
+        if len(lyrics) > 0 and is_japanese("".join(lyrics)):
             for l in lyrics:
                 song.append(l)
             count += 1
 
     # make mp3 song
     song = song[:4]
-    mp3_url = y_.create_song(song)
+    mp3_url = y_.create_song(song, mood)
 
     result = {
         "mp3_url": mp3_url,
