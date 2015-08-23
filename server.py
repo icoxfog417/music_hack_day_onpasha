@@ -3,8 +3,6 @@ import tornado.web
 import tornado.ioloop
 import tornado.httpserver
 import tornado.escape
-from tornado.options import define, options
-from machines.photo_mood.validator import Validator
 import api.photo2song as p2s
 from envs import get_env
 
