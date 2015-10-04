@@ -1,51 +1,40 @@
 import re
-from api.rekognition import Rekognition
-from api.gracenote import Gracenote
-from api.livefans import LiveFans
-from api.petitlyrics import Petitlyrics
-from api.yamaha import Yamaha
+from collections import Counter
+from api.bluemix_vision_recognition import VisionRecognizer
+from api.echonest import Echonest
+from api.spotify import Spotify
+from machines.machine_loader import MachineLoader
+import machines.photo_mood
 
 
 def convert(image_urls):
-    r_ = Rekognition()
-    g_ = Gracenote()
-    l_ = LiveFans()
-    p_ = Petitlyrics()
-    y_ = Yamaha()
+    vr = VisionRecognizer()
+    ec = Echonest()
+    sp = Spotify()
+    photo_to_mood = MachineLoader.load(machines.photo_mood)
+    TARGET_LABELS = ['Boat', 'Human', 'Insect', 'Invertebrate', 'Mammal', 'Man Made Scene', 'Outdoors', 'People Activity', 'Placental Mammal', 'Vertebrate']
 
     # analyze moode
-    moods = r_.images_to_mood(image_urls)
-    #moods = {'Easygoing': 1, 'Cool': 1}
+    moods = Counter()
+    for url in image_urls:
+        result = vr.recognize(url)
+        vector = VisionRecognizer.to_matrix(result, TARGET_LABELS)[0]
+        mood = photo_to_mood.predict(vector)[0]
+        moods[mood] += 1
 
-    # choose artists
-    artists = l_.get_live_artists(5)
+    target_mood = moods.most_common(1)[0][0]
+    target_mood = Echonest.MOOD[int(target_mood)]
 
-    # gracenote api
-    # todo: parallel process by mood
-    mood = max(moods, key=moods.get)
-    tracks = g_.get_artists_mood_tracks(artists, mood)
+    # choose song from mood
+    tracks = ec.search_songs(target_mood)
 
-    # get and build lyric
-    song = []
-    count = 0
-    is_japanese = lambda txt: True if re.search("[ぁ-んァ-ヴ]", txt) else False
+    # load spotify info
     for t in tracks:
-        lyrics = p_.track_to_lyrics(t, offset=count)
-        if len(lyrics) > 0 and is_japanese("".join(lyrics)):
-            for l in lyrics:
-                song.append(l)
-            count += 1
-
-    # make mp3 song
-    song = song[:4]
-    mp3_url = y_.create_song(song, mood)
+        t.load_spotify(sp)
 
     result = {
-        "mp3_url": mp3_url,
-        "moods": moods,
-        "artists": artists,
-        "tracks": tracks,
-        "lyric": song
+        "mood": target_mood,
+        "tracks": [t.__dict__ for t in tracks]
     }
 
     return result

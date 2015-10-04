@@ -1,10 +1,8 @@
 import os
 from datetime import datetime
-import requests
+from api.bluemix_vision_recognition import VisionRecognizer
+from api.echonest import Echonest
 
-
-API_KEY = "b6hbSTEdGClw3CnQ"
-API_SECRET = "n7kK7QoOgtrkJlBL"
 
 def read_file(path):
     lines = []
@@ -26,22 +24,13 @@ def write_file(path, rows, separator="\t"):
 
 
 def rekognize(image_url):
-    url = "https://rekognition.com/func/api/"
-    data = {
-        "api_key": API_KEY,
-        "api_secret": API_SECRET,
-        "jobs": "scene_understanding_3",
-        "urls": image_url,
-        "num_return": 3
-    }
-
+    vr = VisionRecognizer()
+    result = vr.recognize(image_url)
     tag_and_score = {}
-    r = requests.post(url, data=data)
-    if r.ok:
-        content = r.json()
-        if "scene_understanding" in content:
-            for m in content["scene_understanding"]["matches"]:
-                tag_and_score[m["tag"]] = m["score"]
+    if "images" in result:
+        labels = result["images"][0]["labels"]
+        for lb in labels:
+            tag_and_score[lb["label_name"]] = lb["label_score"]
 
     return tag_and_score
 
@@ -49,34 +38,37 @@ def rekognize_all(line):
     tags = []
     data = []
 
-    for ln in line:
-        url = ln[0]
-        mood = ln[1]
-        r = rekognize(url)
-        for k in r:
-            if k not in tags:
-                tags.append(k)
+    for i, ln in enumerate(line):
+        mood = ln[0]
+        url = ln[1]
+        try:
+            r = rekognize(url)
+            for k in r:
+                if k not in tags:
+                    tags.append(k)
 
-        data.append((url, mood, r))
+            data.append((mood, url, r))
+            print("{0} success.".format(i))
+        except Exception as ex:
+            print("{0}: {1}".format(i, ex))
 
     tags.sort()
-    header = ["url", "mood"] + tags
+    header = ["mood", "url"] + tags
     lines = [header]
     for d in data:
-        url = d[0]
-        mood = d[1]
-        tag = d[2]
-        ln = [url, mood]
+        mood, url, tag_scores = d
+        mood_index = -1 if mood not in Echonest.MOOD else Echonest.MOOD.index(mood)
+        ln = [str(mood_index), url]
         for t in tags:
-            if t in tag:
-                ln.append(str(tag[t]))
+            if t in tag_scores:
+                ln.append(str(tag_scores[t]))
             else:
                 ln.append(str(0))
 
         lines.append(ln)
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    path = os.path.join(os.path.dirname(__file__), "./training_data_{0}.txt".format(timestamp))
+    path = os.path.join(os.path.dirname(__file__), "../data/photo_to_mood_{0}.txt".format(timestamp))
     write_file(path, lines)
 
 if __name__ == "__main__":
@@ -91,4 +83,4 @@ if __name__ == "__main__":
         rekognize_all(inputs)
 
     else:
-        print("you have to set image_url and mood file.")
+        print("you have to set mood/image_url file.")

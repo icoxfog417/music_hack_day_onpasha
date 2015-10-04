@@ -22,3 +22,5 @@ tcml1handson/
 *.iws
 
 environ.yaml
+data/*
+!data/.gitkeep

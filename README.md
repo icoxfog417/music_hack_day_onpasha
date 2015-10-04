@@ -4,28 +4,25 @@ Onpasha converts image to song.
 
 ![architecture](./architecture.png)
 
-* Convert image to [Gracenote](https://developer.gracenote.com/ja/web-api?language=ja)'s mood by scikit-learn
-* Get artists info from [LiveFans](http://www.livefans.jp/)
-* Get tracks by mood and artists (Gracenote).
-* Get track's lyric by [PetitLyrics](http://petitlyrics.com/)
-* Build new Lyric from it.
-* Convert lyric to song by [YAMAHA VOCALODUCER](http://jp.yamaha.com/news_release/2013/13102104.html)
+* Recognize the image by [Bluemix Vision Recognizer](http://visual-recognition-demo.mybluemix.net/)
+* Convert image to echonest's mood by machine learning ([scikit-learn](http://scikit-learn.org/))
+* Search tracks by mood by [echonest](http://developer.echonest.com/)
+* Get track's preview url or some information from [Spotify](https://developer.spotify.com/)
 * ([Pepper](http://www.softbank.jp/robot/special/pepper/) sings a song)
 * (Share songs by [SendGrid](https://sendgrid.kke.co.jp/))
 
-Now, you can here your photo image!
+Now, you can listen your photo image!
 
 ## Setting
 
 Please prepare the `environ.yaml` at the project root.
 
 ```
-yamaha_key: your_key
-yamaha_ver: your_key
-rekognition_key: your_key
-rekognition_secret: your_key
-gracenote_client_id: your_key
-gracenote_user_id: your_key
-livefan_client_id: your_key
-petitlyrics_auth_key: your_key
+vision_recognize_user: your_username
+vision_recognize_pass: your_password
+echonest_api_key: your_key
+spotify_client_id : your_client_id
+spotify_client_secret : your_client_secret
 ```
+
+And `SECRET_TOKEN` to encrypt coolie.

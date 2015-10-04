@@ -37,14 +37,27 @@ class VisionRecognizer():
         else:
             raise resp.raise_for_status()
 
+    @classmethod
+    def to_matrix(cls, result, targets):
+        import numpy as np
+        labels = np.zeros((1, len(targets)))
+        if "images" in result:
+            labels = np.zeros((len(result["images"]), len(targets)))
+            for r, image in enumerate(result["images"]):
+                for lb in image["labels"]:
+                    if lb["label_name"] in targets:
+                        labels[r][targets.index(lb["label_name"])] = float(lb["label_score"])
+
+        return labels
+
     def get_labels(self, label_group_or_list):
         url = self.HOST + "/v1/tag/labels"
 
-        params = {
-            "labels_to_check": json.dumps({
+        params = {}
+        if label_group_or_list:
+            params["labels_to_check"] = json.dumps({
                 "label_groups": label_group_or_list if isinstance(label_group_or_list, (list, tuple)) else [label_group_or_list]
             })
-        }
 
         resp = requests.get(url, params=params, auth=(self.username, self.password))
 

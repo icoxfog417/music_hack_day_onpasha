@@ -10,5 +10,5 @@ class TestPhoto2Song(unittest.TestCase):
             "https://oxfordportal.blob.core.windows.net/vision/Thumbnail/4.jpg"
         ]
         result = p2s.convert(image_urls)
-        self.assertTrue(result["mp3_url"])
+        self.assertTrue("results" in result)
         print(result)
