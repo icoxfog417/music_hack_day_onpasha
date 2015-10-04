@@ -2,6 +2,8 @@
 
 Onpasha converts image to song.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ![architecture](./architecture.png)
 
 * Recognize the image by [Bluemix Vision Recognizer](http://visual-recognition-demo.mybluemix.net/)

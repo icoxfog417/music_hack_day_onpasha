@@ -1,0 +1,28 @@
+{
+  "name": "onpasha",
+  "description": "Convert image to song",
+  "repository": "https://github.com/icoxfog417/music_hack_day_onpasha",
+  "keywords": ["echonest", "vision recognition", "spotify"],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/kennethreitz/conda-buildpack",
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies",
+      "generator": "secret"
+    },
+    "vision_recognize_user": {
+      "description": "vision_recognize_username"
+    },
+    "vision_recognize_pass": {
+      "description": "vision_recognize_password"
+    },
+    "echonest_api_key": {
+      "description": "echonest api key"
+    },
+    "spotify_client_id": {
+      "description": "spotify client id"
+    },
+    "spotify_client_secret": {
+      "description": "spotify client secret"
+    }
+  }
+}
