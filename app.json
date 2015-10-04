@@ -9,19 +9,19 @@
       "description": "A secret key for verifying the integrity of signed cookies",
       "generator": "secret"
     },
-    "vision_recognize_user": {
-      "description": "vision_recognize_username"
+    "VISION_RECOGNIZE_USER": {
+      "description": "vision recognize username"
     },
-    "vision_recognize_pass": {
-      "description": "vision_recognize_password"
+    "VISION_RECOGNIZE_PASS": {
+      "description": "vision recognize password"
     },
-    "echonest_api_key": {
+    "ECHONEST_API_KEY": {
       "description": "echonest api key"
     },
-    "spotify_client_id": {
+    "SPOTIFY_CLIENT_ID": {
       "description": "spotify client id"
     },
-    "spotify_client_secret": {
+    "SPOTIFY_CLIENT_SECRET": {
       "description": "spotify client secret"
     }
   }
