@@ -24,12 +24,41 @@
         float:left;
     }
 </style>
+<script>
+    $(function(){
+        $("#photo2song").click(function(){
+            var image_url = $("#image_url").val();
+            if(image_url){
+                $("#response").text("Now converting...");
+                $.post("photo2song", {"image_url": image_url}, function(data){
+                    var s = JSON.stringify(data, null, 4);
+                    $("#response").text(s);
+                });
+            };
+        })
+    })
+</script>
 {% end %}
 
 {% block body %}
 <div id="main" class="ink-grid">
     send POST request to <b>/photo2song</b>.<br/>
     parameter is image_urls (array of urls to image).
+    <br/><br/>
+    <div style="background-color:whitesmoke; padding:15px;">
+        <form class="ink-form">
+            <div class="control-group">
+                <label for="image_url">Image URL</label>
+                <div class="control">
+                    <input id="image_url" name="image_url" type="text" >
+                    <button id="photo2song" class="ink-button" type="button">Submit</button>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <div id="response" style="word-wrap: break-word;">
+        </div>
+    </div>
 </div>
 {% module xsrf_form_html() %}
 {% end %}
