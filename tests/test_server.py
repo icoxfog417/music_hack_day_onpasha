@@ -1,8 +1,9 @@
-import unittest
 import urllib.parse
 import json
+
 from tornado.testing import AsyncHTTPTestCase
-import server
+
+from application import server
 
 
 class BaseTestCase(AsyncHTTPTestCase):
