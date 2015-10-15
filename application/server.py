@@ -42,8 +42,15 @@ class PhotoToSongHandler(BaseHandler):
         image_url = self.get_argument("image_url", default="")
         image_urls = self.get_arguments("image_urls[]")
 
-        if len(image_urls) == 0:
+        if len(image_urls) == 0 and image_url:
             image_urls = [image_url]
+        else:
+            import json
+            body = json.loads(self.request.body.decode("utf-8"))
+            if "image_urls" in body:
+                image_urls = body["image_urls"]
+            elif "image_url" in body:
+                image_urls = [body["image_url"]]
 
         result = {}
         try:
