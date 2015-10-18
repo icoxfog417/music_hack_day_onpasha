@@ -3,7 +3,7 @@ import tornado.web
 import tornado.ioloop
 import tornado.httpserver
 import tornado.escape
-import api.photo2song as p2s
+from application.photo2song_handler import PhotoToSongHandler
 from application.dummy import DummyHandler
 
 
@@ -30,32 +30,3 @@ class Application(tornado.web.Application):
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html", title="title")
-
-
-class BaseHandler(tornado.web.RequestHandler):
-    MACHINE_SESSION_KEY = "photo_mood"
-
-
-class PhotoToSongHandler(BaseHandler):
-
-    def post(self):
-        image_url = self.get_argument("image_url", default="")
-        image_urls = self.get_arguments("image_urls[]")
-
-        if len(image_urls) == 0 and image_url:
-            image_urls = [image_url]
-        else:
-            import json
-            body = json.loads(self.request.body.decode("utf-8"))
-            if "image_urls" in body:
-                image_urls = body["image_urls"]
-            elif "image_url" in body:
-                image_urls = [body["image_url"]]
-
-        result = {}
-        try:
-            result = p2s.convert(image_urls)
-        except Exception as ex:
-            print(ex)
-
-        self.write(result)

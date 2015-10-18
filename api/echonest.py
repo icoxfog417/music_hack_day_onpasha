@@ -5,16 +5,16 @@ from api.spotify import Spotify
 
 class Track():
 
-    def __init__(self, title, artist_name, artist_id, track_id, spotify_id, song_hotttnesss):
+    def __init__(self, title, artist_name, artist_id, track_id, spotify_id, song_hotttnesss, preview_url="", images=(), track_url=""):
         self.title = title
         self.artist_name = artist_name
         self.artist_id = artist_id
         self.track_id = track_id
         self.spotify_id = spotify_id
         self.song_hotttnesss = song_hotttnesss
-        self.preview_url = ""
-        self.images = []
-        self.track_url = ""
+        self.preview_url = preview_url
+        self.images = [] if len(images) == 0 else images
+        self.track_url = track_url
 
     @classmethod
     def create(cls, trackj):
